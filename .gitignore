@@ -26,3 +26,5 @@ node_modules
 *.nav
 *.dvi
 *.synctex.gz
+
+*.pdf
