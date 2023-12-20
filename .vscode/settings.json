@@ -1,0 +1,107 @@
+{
+  "[bibtex]": {
+    "editor.defaultFormatter": "James-Yu.latex-workshop"
+  },
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[latex]": {
+    "editor.defaultFormatter": "James-Yu.latex-workshop"
+  },
+  "files.exclude": {
+    "**/*.aux": true,
+    "**/*.bbl": true,
+    "**/*.blg": true,
+    "**/*.idx": true,
+    "**/*.ind": true,
+    "**/*.lof": true,
+    "**/*.lot": true,
+    "**/*.out": true,
+    "**/*.toc": true,
+    "**/*.acn": true,
+    "**/*.acr": true,
+    "**/*.alg": true,
+    "**/*.glg": true,
+    "**/*.glo": true,
+    "**/*.gls": true,
+    "**/*.ist": true,
+    "**/*.fls": true,
+    "**/*.log": true,
+    "**/*.fdb_latexmk": true,
+    "**/*.snm": true,
+    "**/*.nav": true,
+    "**/*.dvi": true,
+    "**/*.synctex.gz": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 150,
+  "latex-workshop.latex.autoClean.run": "onBuilt",
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux",
+    "*.bbl",
+    "*.blg",
+    "*.idx",
+    "*.ind",
+    "*.lof",
+    "*.lot",
+    "*.out",
+    "*.toc",
+    "*.acn",
+    "*.acr",
+    "*.alg",
+    "*.glg",
+    "*.glo",
+    "*.gls",
+    "*.ist",
+    "*.fls",
+    "*.log",
+    "*.fdb_latexmk",
+    "*.snm",
+    "*.nav",
+    "*.dvi",
+    "*.synctex.gz"
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "pLaTeX",
+      "tools": ["Latexmk (pLaTeX)"]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "args": [
+        "-f",
+        "-gg",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ],
+      "command": "latexmk",
+      "name": "Latexmk (pLaTeX)"
+    }
+  ],
+  "latex-workshop.latexindent.args": [
+    "%TMPFILE%",
+    "-c=%DIR%/",
+    "-y=defaultIndent: '%INDENT%'"
+  ],
+  "latex-workshop.latexindent.path": "latexindent",
+  "latex-workshop.view.pdf.external.synctex.args": [
+    "-forward-search",
+    "%TEX%",
+    "%LINE%",
+    "-reuse-instance",
+    "-inverse-search",
+    "code.cmd -r -g \"%f:%l\"",
+    "%PDF%"
+  ],
+  "latex-workshop.view.pdf.viewer": "tab",
+  "textlint.autoFixOnSave": true,
+  "textlint.run": "onSave",
+  "workbench.editor.enablePreview": false,
+  "workbench.editorAssociations": {
+    "*.pdf": "latex-workshop-pdf-hook"
+  }
+}

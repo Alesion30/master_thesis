@@ -1,14 +1,141 @@
-\documentclass{article}
-\usepackage{graphicx} % Required for inserting images
+%#! platex main.tex
+\documentclass[a4paper,12pt]{jreport}
+\usepackage{jgraduate}          % 卒論・修論用スタイル
 
-\title{修論_大平}
-\author{Yuta Ohira}
-\date{December 2023}
+%% 索引作成
+%\usepackage{makeidx}
+% dvipdfmxを使用しない場合はオプションを変更すること
+\usepackage[dvipdfmx]{graphicx}
+% 数字付きリストでラベルを使う
+\usepackage{enumerate}
+% 数学記号など
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+% URLをいい感じにする
+\usepackage{url}
+\usepackage{cite}
+% キャプション
+\usepackage{subcaption}
 
+%------------------------------
+% 余白設定
+%------------------------------
+\usepackage[left=27mm,right=27mm,top=45mm,bottom=45mm,%
+ headheight=5mm,headsep=10mm,%
+ footskip=12mm%
+ ]{geometry}
+
+%------------------------------
+% hyperref
+%  日本語の文字コード設定が分からない人はコメントアウトすること．
+%------------------------------
+% PDF化したときにしおりが作成され，図表へのジャンプも可能となる．
+\usepackage{atbegshi}
+% Mac/Linuxの場合
+%   ※Ubuntuの場合はEUC-UCS2を自分で入れないとダメ．
+\AtBeginShipoutFirst{\special{pdf:tounicode EUC-UCS2}}
+%% Winの場合
+%\AtBeginShipoutFirst{\special{pdf:tounicode 90ms-RKSJ-UCS2}}
+% 以下は共通
+\usepackage[dvipdfm,a4paper,bookmarks,bookmarksnumbered,%
+ hidelinks,% 目次やリンクテキストの周囲の赤枠を消す
+ bookmarksopen=false,pdfstartview={FitH},%
+ bookmarkstype=toc,%
+ setpagesize=false,%
+ pdfauthor={大平 祐大},%
+% setpagesize=false,% PDFのサイズがおかしい場合はこれを有効化
+ pdftitle={master_thesis}]{hyperref}
+
+%----------------------------------------------------------------------
+% 設定
+%----------------------------------------------------------------------
+% 目次の深さはsubsubsectionまで
+\setcounter{tocdepth}{3}
+
+% 基準となる図の幅
+\newlength\figurewidth
+\setlength{\figurewidth}{0.8\textwidth}
+% 縦に並べた図の間の基準となるスペース
+\newlength\figuresep
+\setlength{\figuresep}{0.8\floatsep}
+
+%----------------------------------------------------------------------
+% 文書基本情報
+%----------------------------------------------------------------------
+% タイトル
+\title{イアラブルデバイスのマイクを用いた\\食事内容と咀嚼回数の推定手法の提案}
+
+% 著者
+\author{大平 祐大}
+
+% 所属
+\university{九州大学大学院}
+\department{システム情報科学府}
+\course{修士課程}
+\major{情報理工学専攻}
+% \submajor{情報理工学コース}
+
+% 提出日（月までを書く）
+\date{令和6年2月}
+
+%% 書いている途中では以下のようにしておくと一部だけをタイプセットできる
+% \includeonly{intro}
+
+%======================================================================
+% テキスト開始
+%======================================================================
 \begin{document}
-
+% 表紙
 \maketitle
+% 表紙はページ番号を出力しない
+\thispagestyle{empty}
 
-\section{Introduction}
+%----------------------------------------------------------------------
+% 概要
+%----------------------------------------------------------------------
+\begin{abstract}
+    食事管理アプリケーションの登場により食品名やカロリーの自動記録が可能になっているが, 健康管理の観点では, 食べる順番, 食べる速度, 咀嚼の回数といった食べ方の情報も重要な要素である. このような食事過程のセンシングを試みる先行研究は存在するが, 独自に開発された専用デバイスの装着が必要不可欠であり, その普及には課題が残っている. そこで, 本研究ではすでに普及している市販のイヤラブルデバイスとスマートフォンのみを使用し, 食事内容と咀嚼回数の推定が可能なセンシング手法を提案する. 具体的には, 食事中に発生する音をメルスペクトログラムに変換し, 畳み込みニューラルネットワークで学習させ, 食事内容推定モデルの作成を行う. また, メルスペクトログラムの各時間軸毎の全ての周波数帯の信号強度の平均をとり, ピーク検出を行うことで咀嚼の検出を行う. 本研究では, データ収集のために, 食事中に発生する音を録音しつつ, 被験者自身が咀嚼回数をカウントできる独自のアプリケーションを開発した. データ収集実験では, 15名の被験者を対象にアプリケーションを配布し, ワイヤレスイヤホンを装着した状態で, 一品ずつ食事を行った. また, 咀嚼検出の分析のために, 実験中に被験者自身の咀嚼回数をカウントするように指示した. 16種類の食品に対して録音を行い, 合計で13422秒の音データを得られた. その結果, 収集した音データで食事内容推定モデルを学習させたところ, 検証用の音データに対して, 精度$77.5\%$で食事内容を推定できることを確認した. また, 10秒間の音データに対して被験者がカウントした咀嚼回数とピーク検出回数との間の平均絶対値誤差$MAE$を算出したところ, $MAE = 4.9$を確認することができた.
+\end{abstract}
+
+%----------------------------------------------------------------------
+% 目次のページ番号は1から
+\setcounter{page}{0}
+% 目次
+\tableofcontents
+
+% 本文のページ番号はアラビア数字
+\pagenumbering{arabic}
+
+%======================================================================
+% 本文ここから
+%======================================================================
+
+% 章ごとのファイルを読み込む
+% YaTeXなら各ファイルを読み込む行でC-c gでジャンプできる
+\include{pages/intro}
+\include{pages/research}
+\include{pages/development}
+\include{pages/method}
+\include{pages/experiment}
+\include{pages/conclu}
+
+% 謝辞
+\include{ack}
+
+%----------------------------------------------------------------------
+% 参考文献
+%----------------------------------------------------------------------
+\bibliographystyle{sieicej}
+\bibliography{bib/IEEEfull,bib/mystr_IEEEfull,bib/my,bib/pub}
+% 書き終えたら，↑の2行をコメントアウトして，BibTeXが生成したmain.bbl
+% をref.texという名前に変更して
+% ↓を有効化するとよい．必要があれば手動で修正する．
+%\include{ref}
+
+%----------------------------------------------------------------------
+% 発表文献
+%----------------------------------------------------------------------
+\include{public}
 
 \end{document}
