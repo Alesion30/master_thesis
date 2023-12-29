@@ -36,7 +36,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.wordWrap": "wordWrapColumn",
-  "editor.wordWrapColumn": 150,
+  "editor.wordWrapColumn": 100,
   "latex-workshop.latex.autoClean.run": "onBuilt",
   "latex-workshop.latex.clean.fileTypes": [
     "*.aux",
