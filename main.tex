@@ -127,8 +127,10 @@
 %----------------------------------------------------------------------
 % 参考文献
 %----------------------------------------------------------------------
-\bibliographystyle{sieicej}
-\bibliography{bib/IEEEfull,bib/mystr_IEEEfull,bib/my,bib/pub}
+% https://github.com/ehki/jIEEEtran/tree/master?tab=readme-ov-file
+\bibliographystyle{jIEEEtran}
+% \bibliography{bib/IEEEfull,bib/mystr_IEEEfull,bib/my}
+\bibliography{bib/my}
 % 書き終えたら，↑の2行をコメントアウトして，BibTeXが生成したmain.bbl
 % をref.texという名前に変更して
 % ↓を有効化するとよい．必要があれば手動で修正する．
@@ -137,6 +139,6 @@
 %----------------------------------------------------------------------
 % 発表文献
 %----------------------------------------------------------------------
-\include{public}
+% \include{public}
 
 \end{document}
