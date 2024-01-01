@@ -5,6 +5,172 @@
 
 本章では, 各食品毎の食事中の音を収集する実験を行う. その後, 収集した音データを分析し, 食事内容および咀嚼回数の推定を行なった.
 
+\begin{figure}[t]
+    \centering
+    \begin{tabular}{c}
+        \begin{minipage}{0.6\hsize}
+            \centering
+            \includegraphics[width=1.0\hsize]{img/sound-example-rice.png}
+            \subcaption{ご飯}
+            \label{fig:sample-data-rice}
+        \end{minipage}
+        \\
+        \\
+        \begin{minipage}{0.6\hsize}
+            \centering
+            \includegraphics[width=1.0\hsize]{img/sound-example-salad.png}
+            \subcaption{サラダ}
+            \label{fig:sample-data-salad}
+        \end{minipage}
+        \\
+        \\
+        \begin{minipage}{0.6\hsize}
+            \centering
+            \includegraphics[width=1.0\hsize]{img/sound-example-soup.png}
+            \subcaption{味噌汁}
+            \label{fig:sample-data-soup}
+        \end{minipage}
+    \end{tabular}
+    \caption{録音データの波形の一例}
+    \label{fig:sample-data}
+\end{figure}
+
+\begin{figure}[t]
+    \begin{center}
+        \includegraphics[clip,  width=0.95\hsize]{img/peak-sample.png}
+        \caption{ピーク検出}
+        \label{fig:peak-sample}
+    \end{center}
+\end{figure}
+
+\begin{figure}[t]
+    \begin{center}
+        \includegraphics[clip,  width=0.95\hsize]{img/food.png}
+        \caption{対象とする食品}
+        \label{fig:foods}
+    \end{center}
+\end{figure}
+
+\begin{table}[t]
+    \centering
+    \caption{被験者データ}
+    \label{personaldata}
+    \scalebox{0.85}{
+        \begin{tabular}{c|c|c|c}
+            \hline
+            \textbf{被験者} & \textbf{年齢} & \textbf{性別} & \textbf{計測した食品}                                                                   \\ \hline\hline
+            A            & 22          & 男           & \begin{tabular}{c}唐揚げ,クリームパン,グラタン\\ハンバーグ,ご飯,せんべい\\サラダ,味噌汁,焼きそば,ヨーグルト\end{tabular} \\ \hline
+            B            & 23          & 男           & クッキー,ポテトチップス                                                                      \\ \hline
+            C            & 22          & 男           & \begin{tabular}{c}クッキー,焼き魚,ハンバーグ\\スパゲティ,ヨーグルト\end{tabular}                        \\ \hline
+            D            & 23          & 男           & クッキー,クリームパン,せんべい                                                                  \\ \hline
+            E            & 23          & 男           & ご飯,サラダ,味噌汁,焼きそば                                                                   \\ \hline
+            F            & 22          & 男           & クリームパン,ポテトチップス,サラダチキン                                                             \\ \hline
+            G            & 27          & 男           & 唐揚げ,ご飯,サラダ,味噌汁                                                                    \\ \hline
+            H            & 23          & 男           & ご飯,せんべい,味噌汁                                                                       \\ \hline
+            I            & 22          & 男           & \begin{tabular}{c}唐揚げ,焼き魚,ハンバーグ\\ゼリー,味噌汁,焼きそば\end{tabular}                        \\ \hline
+            J            & 26          & 男           & せんべい                                                                              \\ \hline
+            K            & 22          & 男           & \begin{tabular}{c}焼き魚,ハンバーグ,スパゲティ\\サラダチキン,味噌汁,ヨーグルト\end{tabular}                  \\ \hline
+            L            & 22          & 男           & グラタン,せんべい                                                                         \\ \hline
+            M            & 21          & 男           & 唐揚げ,ご飯,サラダ,味噌汁                                                                    \\ \hline
+            N            & 23          & 男           & ゼリー,ポテトチップス                                                                       \\ \hline
+            O            & 22          & 男           & クッキー,せんべい                                                                         \\ \hline
+        \end{tabular}
+    }
+\end{table}
+
+\begin{figure*}[t]
+    \begin{center}
+        \includegraphics[clip,  width=0.9\hsize]{img/sound-data.png}
+        \caption{食品毎の録音データ}
+        \label{fig:sound-data}
+    \end{center}
+\end{figure*}
+
+\begin{figure*}[t]
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/chicken.png}
+        \subcaption{唐揚げ}
+    \end{minipage}
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/rice.png}
+        \subcaption{ご飯}
+    \end{minipage}
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/soup.png}
+        \subcaption{味噌汁}
+    \end{minipage}
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/salad.png}
+        \subcaption{サラダ}
+    \end{minipage}
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/rice-cookie.png}
+        \subcaption{せんべい}
+    \end{minipage}
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/gratin.png}
+        \subcaption{グラタン}
+    \end{minipage}
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/cookie.png}
+        \subcaption{クッキー}
+    \end{minipage}
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/potato-chips.png}
+        \subcaption{ポテトチップス}
+    \end{minipage}
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/neapolitan.png}
+        \subcaption{スパゲティ}
+    \end{minipage}
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/yogurt.png}
+        \subcaption{ヨーグルト}
+    \end{minipage}
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/hamburg.png}
+        \subcaption{ハンバーグ}
+    \end{minipage}
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/salad-chicken.png}
+        \subcaption{サラダチキン}
+    \end{minipage}
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/cream-filled-roll.png}
+        \subcaption{クリームパン}
+    \end{minipage}
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/yakisoba.png}
+        \subcaption{焼きそば}
+    \end{minipage}
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/jelly.png}
+        \subcaption{ゼリー}
+    \end{minipage}
+    \begin{minipage}[b]{0.16\hsize}
+        \centering
+        \includegraphics[width=\hsize]{img/melspec/grilled-fish.png}
+        \subcaption{焼き魚}
+    \end{minipage}
+    \caption{録音データのメルスペクトログラムの一例}
+    \label{fig:sample-melspec-data}
+\end{figure*}
+
 %----------------------------------------------------------------------
 \section{対象とする食事}
 
