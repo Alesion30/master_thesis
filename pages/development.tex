@@ -3,17 +3,25 @@
 %======================================================================
 \chapter{データ収集アプリケーションの設計・開発}
 
-本章では, 本研究の実験で用いるデータ収集アプリケーションの設計および開発について述べる. 本稿では, 食事中の音を収集するために, 1から独自でアプリケーションを開発した（図\ref{fig:application}）. また, TestFlight\footnote{TestFlight - Apple Developer~\url{https://developer.apple.com/testflight/}}を用いてiOSユーザ向けに配信できるようにし, 被験者自身の端末を用いて実験を行うことができるようにした.
+本研究の目的は, 食事中の音から食品を認識し, 咀嚼を検出することである. 本研究では, 機械学習技術を用いて食品認識と咀嚼検出を行うが, 機械学習モデルの訓練には, 大量のデータが必要とされるため, 必要なデータを効率的に収集するためのアプリケーションの開発が不可欠である. 食品認識と咀嚼検出には, 食事中の音データと食品ラベルと咀嚼タイムスタンプを含む正解データが必要である. 食事中の音を録音すること自体は, 例えばiPhoneのボイスメモのような一般的な録音アプリでも可能だが, 録音設定を固定にしないと分析精度に影響を及ぼす可能性がある. そのため, ノイズキャンセリングやサンプリングレートなどの録音設定を自由に調整できる機能が求められる. さらに, 咀嚼検出には咀嚼タイムスタンプの正解データが必要であるが, 食事中の動画や音声からこれらのデータを手作業でアノテーションするのは非常に困難である. これらのニーズはかなり特殊であり, 既存のアプリケーションではこれらのデータを効率的に収集するのは困難である. そのため, 研究の効率化のため, 図\ref{fig:application}に示すデータ収集アプリケーションを1から独自で開発した.また, TestFlight\footnote{TestFlight - Apple Developer~\url{https://developer.apple.com/testflight/}}を用いてiOSユーザ向けに配信できるようにし, 被験者自身の端末を用いて実験を行うことができるようにした.
 
 \begin{figure}[t]
     \begin{center}
         \includegraphics[clip,  width=0.95\hsize]{img/application.png}
-        \caption{食事中の音を計測するアプリケーション}
+        \caption{データ収集アプリケーション}
         \label{fig:application}
     \end{center}
 \end{figure}
 
-今回開発したアプリは, 実験用のデータ収集アプリとしての要件を満たすために以下の機能が搭載されている.
+今回開発したアプリは, 実験用のデータ収集アプリとしての要件を満たすために以下の機能が搭載されている. また, システム概要を図\ref{fig:application-abst}に示す.
+
+\begin{figure}[t]
+    \begin{center}
+        \includegraphics[clip,  width=0.95\hsize]{img/application-abst.png}
+        \caption{データ収集アプリケーションのシステム概要}
+        \label{fig:application-abst}
+    \end{center}
+\end{figure}
 
 \begin{itemize}
     \item 食事中の音を録音する機能
