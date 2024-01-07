@@ -79,7 +79,10 @@
         "%DOC%"
       ],
       "command": "latexmk",
-      "name": "Latexmk (pLaTeX)"
+      "name": "Latexmk (pLaTeX)",
+      "env": {
+        "PATH": "/Library/TeX/texbin/latexmk"
+      }
     }
   ],
   "latex-workshop.latexindent.args": [
@@ -87,7 +90,7 @@
     "-c=%DIR%/",
     "-y=defaultIndent: '%INDENT%'"
   ],
-  "latex-workshop.latexindent.path": "latexindent",
+  "latex-workshop.latexindent.path": "/Library/TeX/texbin/latexindent",
   "latex-workshop.view.pdf.external.synctex.args": [
     "-forward-search",
     "%TEX%",
